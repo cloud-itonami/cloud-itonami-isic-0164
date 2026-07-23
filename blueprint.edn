@@ -1,4 +1,4 @@
-{:itonami.blueprint/id "cloud-itonami-0164"
+{:itonami.blueprint/id "cloud-itonami-isic-0164"
  :itonami.blueprint/name "Seed Processing for Propagation Coordination"
  :itonami.blueprint/isic-rev5 "0164"
  :itonami.blueprint/domain :agriculture/seed-processing
