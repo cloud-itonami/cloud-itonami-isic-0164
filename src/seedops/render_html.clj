@@ -405,11 +405,6 @@
     processed?          (tag "warn" "登録済 · 未出荷")
     :else               (tag "muted" "未登録")))
 
-(defn- batch-result-for
-  "The last result this run produced for a batch."
-  [results b-id]
-  (last (filter #(= b-id (:subject %)) results)))
-
 (defn- approver-cell
   "Who signed the commit --- and, crucially, whether the STORE kept it.
   `seedops.store/log-batch` and `finalize-shipment` take no approver
@@ -654,7 +649,7 @@
     ".card>:first-child{margin-top:0}"
     ".card>:last-child{margin-bottom:0}"
     ".table-wrap{overflow-x:auto;max-width:100%}"
-    (str "table{border-collapse:collapse;width:100%;margin:.75rem 0 .5rem;font-size:.8125rem}")
+    "table{border-collapse:collapse;width:100%;margin:.75rem 0 .5rem;font-size:.8125rem}"
     (str "th,td{border:1px solid var(--color-neutral-solid-gray-300);padding:.5rem .75rem;"
          "text-align:left;vertical-align:top}")
     (str "th{background:var(--color-neutral-solid-gray-50);font-weight:700;"
