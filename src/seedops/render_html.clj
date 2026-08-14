@@ -43,10 +43,19 @@
   current, 90 days = past the 60-day limit) and are never rendered, which
   keeps both the bytes and the verdicts stable over time.
 
+  Styling: the page carries the same デジタル庁デザインシステム (DADS) token layer
+  as this repo's own product face. It is lifted at build time out of the copy
+  already vendored inside `docs/index.html` (see `dads-token-layer`) rather than
+  pulled from a `jp-go-dds` git coordinate, so the build needs no network and the
+  console cannot drift away from the page it sits next to. Only the DADS
+  primitives actually referenced are used, and `-main` fails the build if any
+  `var(--x)` on the finished page resolves to nothing --- an unstyled console is
+  a build error here, not a thing you find by looking at it.
+
   Usage: `clojure -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
-  (:require [clojure.string :as str]
-            [jp-go-dds.skin]
+  (:require [clojure.java.io :as io]
+            [clojure.string :as str]
             [seedops.facts :as facts]
             [seedops.governor :as governor]
             [seedops.operation :as op]
@@ -498,7 +507,10 @@
       (code (or disposition :n-a))
       (if (seq basis) (kw-list basis) (tag "muted" "—"))
       (if by (esc by) (tag "muted" "—"))
-      (num confidence)))
+      ;; `fmt-num`, not `clojure.core/num`: most ledger facts carry no
+      ;; `:confidence`, and `num` renders that nil as an empty cell that reads
+      ;; like a confidence of zero. An absent measurement must look absent.
+      (fmt-num confidence)))
 
 ;; ── reference tables (straight out of seedops.facts) ──
 
@@ -585,6 +597,81 @@
             (tag "ok" "actor のファクトが承認者を含む")
             (tag "warn" "actor が書くのは :governor-hold のみで、そこに承認者の欄は無い (:actor は actor id)")))])))
 
+;; ── styling (DADS, taken from the copy this repo already vendors) ──
+
+(def ^:private product-face
+  "This repo's product page. It already vendors the DADS stylesheet inline, so
+  it --- not a git coordinate --- is where the console gets its tokens."
+  "docs/index.html")
+
+(defn- dads-token-layer
+  "The `:root { --color-… }` custom-property block out of `product-face`.
+
+  Extracted rather than re-declared so the console and the product page cannot
+  disagree about what `--color-key-900` is, and so the build stays offline.
+  Throws instead of degrading: a console that silently loses its token layer
+  still renders --- it just renders unstyled, with every `var()` falling back to
+  nothing --- and that is exactly the failure this whole file is supposed to make
+  impossible to ship unnoticed."
+  []
+  (let [f (io/file product-face)]
+    (when-not (.exists f)
+      (throw (ex-info (str "cannot style the console: " product-face " is missing, and it is "
+                           "where the vendored DADS token layer comes from")
+                      {:expected product-face})))
+    (let [html  (slurp f)
+          style (second (re-find #"(?s)<style>(.*?)</style>" html))
+          root  (second (re-find #"(?s):root\s*\{(.*?)\}" (or style "")))]
+      (when (str/blank? root)
+        (throw (ex-info (str "cannot style the console: no `:root` custom-property block found in "
+                             product-face " --- the product face no longer vendors DADS inline")
+                        {:expected product-face})))
+      (str ":root{" (str/trim root) "}"))))
+
+(def ^:private console-css
+  "Component rules for this console's small class vocabulary. Every colour, font
+  and rule below resolves through a DADS primitive from `dads-token-layer` --- no
+  raw hex, and nothing referenced that the token layer does not define (enforced
+  in `-main`)."
+  (str/join
+   "\n"
+   ["*,*::before,*::after{box-sizing:border-box}"
+    (str "body{font-family:var(--font-family-sans);color:var(--color-neutral-solid-gray-800);"
+         "background:var(--color-neutral-white);line-height:1.8;max-width:78rem;margin:0 auto;"
+         "padding:2rem 1rem 4rem}")
+    (str "h1{font-size:1.75rem;font-weight:700;line-height:1.4;margin:0;"
+         "color:var(--color-neutral-solid-gray-900)}")
+    (str "h2{font-size:1.375rem;font-weight:700;line-height:1.5;margin:0 0 .25rem;"
+         "color:var(--color-neutral-solid-gray-900)}")
+    "p{margin:0 0 1rem}"
+    (str ".bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:.75rem 0 1rem;"
+         "margin-bottom:1.5rem;border-bottom:1px solid var(--color-neutral-solid-gray-200)}")
+    (str ".badge{display:inline-block;font-size:.8125rem;font-weight:700;padding:.1rem .625rem;"
+         "border-radius:1rem;background:var(--color-primitive-blue-50);color:var(--color-key-900);"
+         "border:1px solid var(--color-primitive-blue-200)}")
+    (str ".card{border:1px solid var(--color-neutral-solid-gray-200);border-radius:12px;"
+         "padding:1.25rem 1.5rem;margin:1.25rem 0;background:var(--color-neutral-white)}")
+    ".card>:first-child{margin-top:0}"
+    ".card>:last-child{margin-bottom:0}"
+    ".table-wrap{overflow-x:auto;max-width:100%}"
+    (str "table{border-collapse:collapse;width:100%;margin:.75rem 0 .5rem;font-size:.8125rem}")
+    (str "th,td{border:1px solid var(--color-neutral-solid-gray-300);padding:.5rem .75rem;"
+         "text-align:left;vertical-align:top}")
+    (str "th{background:var(--color-neutral-solid-gray-50);font-weight:700;"
+         "color:var(--color-neutral-solid-gray-900);white-space:nowrap}")
+    (str "code{font-family:var(--font-family-mono);background:var(--color-neutral-solid-gray-50);"
+         "border:1px solid var(--color-neutral-solid-gray-200);border-radius:4px;padding:1px 5px;"
+         "font-size:.9em}")
+    ;; Governor dispositions. Weight carries the meaning as well as colour, so
+    ;; the three states stay distinguishable without relying on hue alone.
+    ".ok{color:var(--color-semantic-success-2);font-weight:700}"
+    ".warn{color:var(--color-semantic-warning-yellow-2);font-weight:700}"
+    ".critical{color:var(--color-semantic-error-1);font-weight:700}"
+    ".muted{color:var(--color-neutral-solid-gray-600);font-weight:400}"
+    (str "footer{margin-top:3rem;padding-top:1.5rem;"
+         "border-top:1px solid var(--color-neutral-solid-gray-200);"
+         "color:var(--color-neutral-solid-gray-600);font-size:.875rem}")]))
+
 ;; ── document ──
 
 (defn- render
@@ -596,7 +683,7 @@
      "<html lang=\"ja\"><head><meta charset=\"utf-8\">"
      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">"
      "<title>cloud-itonami-isic-0164 · 種子調製 (propagation) オペレーターコンソール</title>"
-     "<style>" (jp-go-dds.skin/dds+skin) "</style></head><body>\n"
+     "<style>" (dads-token-layer) "\n" console-css "</style></head><body>\n"
      "<header class=\"bar\">\n"
      "  <h1>Seed processing for propagation (ISIC 0164) — Operator Console</h1>\n"
      "  <span class=\"badge\">read-only sample · governor-gated · バッチ登録と出荷確定は常に人間の署名が要る</span>\n"
@@ -683,6 +770,15 @@
     (let [j (str/index-of s sub i)]
       (if j (recur (+ j (count sub)) (inc n)) n))))
 
+(defn- unresolved-css-vars
+  "Every `var(--x)` the page references but never defines. A page whose token
+  layer failed to load still renders --- it just renders unstyled --- so this is
+  checked as a build invariant rather than left to whoever opens the file."
+  [html]
+  (let [used    (set (map second (re-seq #"var\((--[a-z0-9-]+)" html)))
+        defined (set (map second (re-seq #"(--[a-z0-9-]+)\s*:" html)))]
+    (sort (remove defined used))))
+
 (defn -main [& args]
   (let [out       (or (first args) "docs/samples/operator-console.html")
         world     (run-demo!)
@@ -704,6 +800,12 @@
                            "produced decisions (" (count (:results world)) ") — a table body "
                            "was dropped or stringified instead of rendered")
                       {:rendered-rows row-n :decisions (count (:results world))})))
+    (when-let [dangling (seq (unresolved-css-vars html))]
+      (throw (ex-info (str "operator console references " (count dangling) " CSS custom "
+                           "propert" (if (= 1 (count dangling)) "y" "ies")
+                           " nothing defines — the DADS token layer did not survive into the "
+                           "page, which would ship a silently unstyled console")
+                      {:unresolved (vec dangling)})))
     (spit out html)
     (println "wrote" out
              (str "(" hard-n " HARD holds, " section-n " sections, " row-n " data rows, "
