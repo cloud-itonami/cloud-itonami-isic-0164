@@ -7,6 +7,14 @@
         io.github.kotoba-lang/langgraph
         {:local/root "../../kotoba-lang/langgraph"}}}
   :run {:main-opts ["-m" "seedops.sim"]}
+  ;; clojure -M:dev:render-html [out-file]
+  ;; -> regenerate docs/samples/operator-console.html by driving the real
+  ;;    actor stack (operation -> governor -> store). Flagship checklist
+  ;;    item 2. No extra deps on purpose: the console's DADS token layer is
+  ;;    lifted at build time from the copy already vendored in
+  ;;    docs/index.html, so the page builds offline and cannot drift from
+  ;;    this repo's own product face.
+  :render-html {:main-opts ["-m" "seedops.render-html"]}
   :test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner
                       {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
