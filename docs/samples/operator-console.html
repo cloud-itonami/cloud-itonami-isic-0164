@@ -2474,7 +2474,19 @@ img,svg { max-width: 100%; height: auto; }</style></head><body>
     <table>
       <thead><tr><th>Batch</th><th>Seed-lot type</th><th>法域</th><th>Seed source</th><th>測定値 (水分/発芽/純度/他作物 %)</th><th>規格窓</th><th>ライフサイクル</th><th>承認者</th><th>この run での役割</th></tr></thead>
       <tbody>
-clojure.lang.LazySeq@b62d72d6
+        <tr><td><code>batch-001</code></td><td>ハイブリッドとうもろこし種子<br><span class="muted"><code>maize/hybrid</code></span></td><td>日本 (種苗法・農林水産省)</td><td>maize/hybrid-bt</td><td>13 / 90 / 98 / 0.5</td><td>13±0.5 / ≥90 / ≥98 / ≤0.5</td><td><span class="ok">登録済 → 出荷確定</span></td><td>op-1 <span class="warn">· store は保持せず (監査ファクトのみ)</span></td><td>at spec — drives the full approved lifecycle</td></tr>
+        <tr><td><code>batch-002</code></td><td>認証小麦種子<br><span class="muted"><code>wheat/certified</code></span></td><td>United States (Federal Seed Act / USDA-AMS)</td><td>wheat/hard-red-certified</td><td>12 / 79 / 99 / 0.3</td><td>12±0.5 / ≥85 / ≥99 / ≤0.3</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>germination below the certification floor</td></tr>
+        <tr><td><code>batch-003</code></td><td>認証大豆種子<br><span class="muted"><code>soybean/certified</code></span></td><td>European Union (OECD Seed Schemes / EU Seed Marketing Directive)</td><td>soybean/roundup-ready</td><td>11 / 80 / 98 / 0.5</td><td>11±0.5 / ≥80 / ≥98 / ≤0.5</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>GM herbicide-tolerance trait present but not declared</td></tr>
+        <tr><td><code>batch-004</code></td><td>トマト種子<br><span class="muted"><code>vegetable/tomato</code></span></td><td>日本 (種苗法・農林水産省)</td><td>tomato/hybrid-f1</td><td>7 / 75 / 97 / 1</td><td>7±0.5 / ≥75 / ≥97 / ≤1</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>seed-borne pathogen detected on this lot's own screening</td></tr>
+        <tr><td><code>batch-005</code></td><td>ハイブリッドとうもろこし種子<br><span class="muted"><code>maize/hybrid</code></span></td><td>United States (Federal Seed Act / USDA-AMS)</td><td>maize/hybrid-bt</td><td>14 / 90 / 98 / 0.5</td><td>13±0.5 / ≥90 / ≥98 / ≤0.5</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>moisture above the safe storage window</td></tr>
+        <tr><td><code>batch-006</code></td><td>認証小麦種子<br><span class="muted"><code>wheat/certified</code></span></td><td>日本 (種苗法・農林水産省)</td><td>wheat/soft-white-certified</td><td>12 / 85 / 99 / 0.3</td><td>12±0.5 / ≥85 / ≥99 / ≤0.3</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>germinator calibration past the 60-day limit</td></tr>
+        <tr><td><code>batch-007</code></td><td>認証大豆種子<br><span class="muted"><code>soybean/certified</code></span></td><td>United States (Federal Seed Act / USDA-AMS)</td><td>soybean/conventional</td><td>11 / 80 / 98 / 0.5</td><td>11±0.5 / ≥80 / ≥98 / ≤0.5</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>germination test missing from the evidence checklist</td></tr>
+        <tr><td><code>batch-008</code></td><td>トマト種子<br><span class="muted"><code>vegetable/tomato</code></span></td><td>European Union (OECD Seed Schemes / EU Seed Marketing Directive)</td><td>tomato/heirloom</td><td>7 / 75 / 97 / 1</td><td>7±0.5 / ≥75 / ≥97 / ≤1</td><td><span class="muted">未登録</span></td><td>op-1 <span class="warn">· store は保持せず (監査ファクトのみ)</span></td><td>quality concern raised and still open</td></tr>
+        <tr><td><code>batch-009</code></td><td>ハイブリッドとうもろこし種子<br><span class="muted"><code>maize/hybrid</code></span></td><td>European Union (OECD Seed Schemes / EU Seed Marketing Directive)</td><td>maize/hybrid-conventional</td><td>13 / 90 / 98 / 0.5</td><td>13±0.5 / ≥90 / ≥98 / ≤0.5</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>facility sanitation score below the 75 minimum</td></tr>
+        <tr><td><code>batch-010</code></td><td>認証小麦種子<br><span class="muted"><code>wheat/certified</code></span></td><td>European Union (OECD Seed Schemes / EU Seed Marketing Directive)</td><td>wheat/hard-red-certified</td><td>12 / 85 / 99 / 0.6</td><td>12±0.5 / ≥85 / ≥99 / ≤0.3</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>other-crop seed above this lot type's tolerance</td></tr>
+        <tr><td><code>batch-011</code></td><td>認証大豆種子<br><span class="muted"><code>soybean/certified</code></span></td><td>日本 (種苗法・農林水産省)</td><td>soybean/conventional</td><td>11 / 80 / 92 / 0.5</td><td>11±0.5 / ≥80 / ≥98 / ≤0.5</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>physical purity below the product window</td></tr>
+        <tr><td><code>batch-012</code></td><td>トマト種子<br><span class="muted"><code>vegetable/tomato</code></span></td><td>United States (Federal Seed Act / USDA-AMS)</td><td>tomato/hybrid-f1</td><td>7 / 75 / 97 / 1</td><td>7±0.5 / ≥75 / ≥97 / ≤1</td><td><span class="muted">未登録</span></td><td><span class="muted">承認なし</span></td><td>finished-package weight variance over the 50 g tolerance</td></tr>
+        <tr><td><code>batch-013</code></td><td>ハイブリッドとうもろこし種子<br><span class="muted"><code>maize/hybrid</code></span></td><td>日本 (種苗法・農林水産省)</td><td>maize/hybrid-bt</td><td><span class="muted">—</span></td><td>13±0.5 / ≥90 / ≥98 / ≤0.5</td><td><span class="critical">store に未登録</span></td><td><span class="muted">承認なし</span></td><td>never checked in — shipment coordination must refuse it</td></tr>
       </tbody>
     </table>
     </div>
@@ -2486,7 +2498,28 @@ clojure.lang.LazySeq@b62d72d6
     <table>
       <thead><tr><th>シナリオ</th><th>Op</th><th>Batch</th><th>判定</th><th>確信度</th><th>違反 rule / Governor の説明</th></tr></thead>
       <tbody>
-clojure.lang.LazySeq@3dc249b2
+        <tr><td>登録 (承認あり)</td><td><code>log-processing-batch</code></td><td><code>batch-001</code></td><td><span class="ok">escalate → 承認 → 確定</span></td><td>0.9</td><td><span class="muted">違反なし (soft gate のみ)</span></td></tr>
+        <tr><td>出荷確定 (承認あり)</td><td><code>coordinate-shipment</code></td><td><code>batch-001</code></td><td><span class="ok">escalate → 承認 → 確定</span></td><td>0.9</td><td><span class="muted">違反なし (soft gate のみ)</span></td></tr>
+        <tr><td>設備保守 (自動確定)</td><td><code>schedule-maintenance</code></td><td><code>batch-001</code></td><td><span class="ok">auto-commit</span></td><td>0.9</td><td><span class="muted">違反なし (soft gate のみ)</span></td></tr>
+        <tr><td>設備保守 (確信度不足)</td><td><code>schedule-maintenance</code></td><td><code>batch-001</code></td><td><span class="warn">escalate · 人間の署名待ち</span></td><td>0.4</td><td><span class="muted">違反なし (soft gate のみ)</span></td></tr>
+        <tr><td>品質フラグ (承認あり)</td><td><code>flag-quality-concern</code></td><td><code>batch-008</code></td><td><span class="ok">escalate → 承認 → 確定</span></td><td>0.9</td><td><span class="muted">違反なし (soft gate のみ)</span></td></tr>
+        <tr><td>二重登録</td><td><code>log-processing-batch</code></td><td><code>batch-001</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>already-processed</code> <span class="muted">batch-001 は既に登録済み</span></td></tr>
+        <tr><td>二重出荷確定</td><td><code>coordinate-shipment</code></td><td><code>batch-001</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>already-shipment-finalized</code> <span class="muted">batch-001 は既に出荷確定済み</span></td></tr>
+        <tr><td>発芽率不足</td><td><code>log-processing-batch</code></td><td><code>batch-002</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>germination-rate-below-minimum</code> <span class="muted">batch-002 の発芽率(79.0%)が最低要件(85.0%)を下回る -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>形質表示不一致</td><td><code>log-processing-batch</code></td><td><code>batch-003</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>trait-label-mismatch</code> <span class="muted">batch-003 の形質表示が不完全 -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>種子伝染性病害</td><td><code>log-processing-batch</code></td><td><code>batch-004</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>seed-borne-disease-detected</code> <span class="muted">batch-004 で種子伝染性病害(病原体)が検出された -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>水分逸脱</td><td><code>log-processing-batch</code></td><td><code>batch-005</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>moisture-out-of-target</code> <span class="muted">batch-005 の水分(14.0%)が目標範囲外 -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>校正期限切れ</td><td><code>log-processing-batch</code></td><td><code>batch-006</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>germinator-calibration-overdue</code> <span class="muted">batch-006 の発芽試験機(ジャーミネーター)校正が期限切れ -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>必要書類欠落</td><td><code>log-processing-batch</code></td><td><code>batch-007</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>evidence-incomplete</code> <span class="muted">法域の必要書類(seed-lot-intake-record/cleaning-grading-log/germination-test/purity-test等)が充足していない状態での提案</span></td></tr>
+        <tr><td>品質フラグ未解決</td><td><code>log-processing-batch</code></td><td><code>batch-008</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>quality-flag-unresolved</code> <span class="muted">batch-008 は未解決の品質フラグがある -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>衛生スコア不足</td><td><code>log-processing-batch</code></td><td><code>batch-009</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>sanitation-score-insufficient</code> <span class="muted">batch-009 の施設衛生/交差汚染防止スコア(60)が最低要件(75)を下回る -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>他作物種子超過</td><td><code>log-processing-batch</code></td><td><code>batch-010</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>other-crop-seed-exceeded</code> <span class="muted">batch-010 の他作物種子混入率(0.6%)が製品規格範囲外 -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>純度不足</td><td><code>log-processing-batch</code></td><td><code>batch-011</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>purity-below-minimum</code> <span class="muted">batch-011 の純度(92.0%)が製品規格を下回る -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>重量分散超過</td><td><code>log-processing-batch</code></td><td><code>batch-012</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>weight-variance-excessive</code> <span class="muted">batch-012 の重量分散(60g)が許容範囲(50g)を超過 -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td>未登録バッチの出荷</td><td><code>coordinate-shipment</code></td><td><code>batch-013</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>batch-not-registered</code> <span class="muted">batch-013 は施設に登録されたバッチ記録が無い -- 出荷調整提案は進められない</span></td></tr>
+        <tr><td>許可外の操作</td><td><code>operate-gravity-table</code></td><td><code>batch-001</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>op-not-allowed</code> <span class="muted">:operate-gravity-table はこのactorの許可された提案種別 (log-processing-batch/schedule-maintenance/flag-quality-concern/coordinate-shipment) に含まれない -- 洗浄/選別機制御やseed-certification認証権限はこのactorに無い</span></td></tr>
+        <tr><td>propose 以外の effect</td><td><code>schedule-maintenance</code></td><td><code>batch-001</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>effect-not-propose</code> <span class="muted">この actor の提案は :propose 以外の :effect を持てない (got :commit)</span></td></tr>
+        <tr><td>法域引用なし</td><td><code>flag-quality-concern</code></td><td><code>batch-008</code></td><td><span class="critical">HARD hold · 上書き不可</span></td><td>0.9</td><td><code>no-spec-basis</code> <span class="muted">公式仕様の引用が無い提案は法域要件として扱えない</span></td></tr>
       </tbody>
     </table>
     </div>
@@ -2498,7 +2531,23 @@ clojure.lang.LazySeq@3dc249b2
     <table>
       <thead><tr><th>Rule</th><th>この run</th><th>発火したバッチ</th><th>Governor の説明 (実出力)</th></tr></thead>
       <tbody>
-clojure.lang.LazySeq@1a7ae44a
+        <tr><td><code>op-not-allowed</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-001</code></td><td><span class="muted">:operate-gravity-table はこのactorの許可された提案種別 (log-processing-batch/schedule-maintenance/flag-quality-concern/coordinate-shipment) に含まれない -- 洗浄/選別機制御やseed-certification認証権限はこのactorに無い</span></td></tr>
+        <tr><td><code>effect-not-propose</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-001</code></td><td><span class="muted">この actor の提案は :propose 以外の :effect を持てない (got :commit)</span></td></tr>
+        <tr><td><code>no-spec-basis</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-008</code></td><td><span class="muted">公式仕様の引用が無い提案は法域要件として扱えない</span></td></tr>
+        <tr><td><code>evidence-incomplete</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-007</code></td><td><span class="muted">法域の必要書類(seed-lot-intake-record/cleaning-grading-log/germination-test/purity-test等)が充足していない状態での提案</span></td></tr>
+        <tr><td><code>moisture-out-of-target</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-005</code></td><td><span class="muted">batch-005 の水分(14.0%)が目標範囲外 -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>germination-rate-below-minimum</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-002</code></td><td><span class="muted">batch-002 の発芽率(79.0%)が最低要件(85.0%)を下回る -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>purity-below-minimum</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-011</code></td><td><span class="muted">batch-011 の純度(92.0%)が製品規格を下回る -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>other-crop-seed-exceeded</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-010</code></td><td><span class="muted">batch-010 の他作物種子混入率(0.6%)が製品規格範囲外 -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>seed-borne-disease-detected</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-004</code></td><td><span class="muted">batch-004 で種子伝染性病害(病原体)が検出された -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>germinator-calibration-overdue</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-006</code></td><td><span class="muted">batch-006 の発芽試験機(ジャーミネーター)校正が期限切れ -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>weight-variance-excessive</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-012</code></td><td><span class="muted">batch-012 の重量分散(60g)が許容範囲(50g)を超過 -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>trait-label-mismatch</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-003</code></td><td><span class="muted">batch-003 の形質表示が不完全 -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>sanitation-score-insufficient</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-009</code></td><td><span class="muted">batch-009 の施設衛生/交差汚染防止スコア(60)が最低要件(75)を下回る -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>quality-flag-unresolved</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-008</code></td><td><span class="muted">batch-008 は未解決の品質フラグがある -- バッチ登録提案は進められない</span></td></tr>
+        <tr><td><code>already-processed</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-001</code></td><td><span class="muted">batch-001 は既に登録済み</span></td></tr>
+        <tr><td><code>already-shipment-finalized</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-001</code></td><td><span class="muted">batch-001 は既に出荷確定済み</span></td></tr>
+        <tr><td><code>batch-not-registered</code></td><td><span class="critical">HARD hold 発生</span></td><td><code>batch-013</code></td><td><span class="muted">batch-013 は施設に登録されたバッチ記録が無い -- 出荷調整提案は進められない</span></td></tr>
       </tbody>
     </table>
     </div>
@@ -2510,7 +2559,12 @@ clojure.lang.LazySeq@1a7ae44a
     <table>
       <thead><tr><th>プローブ</th><th>測定結果</th><th>含意</th></tr></thead>
       <tbody>
-["        <tr><td>承認パスで actor が返す監査ファクト</td><td><code>0 facts</code></td><td><span class=\"warn\">operation/run-operation は :ok? の枝で :facts [] を返す — 確定の記録は呼び出し側 (このコンソール) が書いている</span></td></tr>" "        <tr><td>hold ファクトが hard と escalate を区別するか</td><td><code>no :hard? key</code></td><td><span class=\"warn\">governor/hold-fact は :hard? を記録しない — 台帳上、上書き不可の HARD hold と 人間署名待ちの escalate はどちらも :disposition :hold で並ぶ。この表の判定は run 時の verdict から導出している</span></td></tr>" "        <tr><td>escalate 時のファクトの :disposition</td><td><code>hold</code></td><td><span class=\"warn\">人間の署名待ちも :hold として記録される (:basis が空かどうかが唯一の手掛かり)</span></td></tr>" "        <tr><td>HARD hold ファクトの :basis</td><td>already-processed</td><td><span class=\"ok\">違反 rule が台帳に残る</span></td></tr>" "        <tr><td>確定レコードに承認者が残るか</td><td><code>dropped</code></td><td><span class=\"warn\">store/log-batch・finalize-shipment は承認者引数を持たない — 確定した batch 記録に op-1 は残らない。承認者は 3 件の :approval-committed 監査ファクトにのみ存在する</span></td></tr>" "        <tr><td>actor 自身のファクトに承認者が現れるか</td><td><code>absent</code></td><td><span class=\"warn\">actor が書くのは :governor-hold のみで、そこに承認者の欄は無い (:actor は actor id)</span></td></tr>"]
+        <tr><td>承認パスで actor が返す監査ファクト</td><td><code>0 facts</code></td><td><span class="warn">operation/run-operation は :ok? の枝で :facts [] を返す — 確定の記録は呼び出し側 (このコンソール) が書いている</span></td></tr>
+        <tr><td>hold ファクトが hard と escalate を区別するか</td><td><code>no :hard? key</code></td><td><span class="warn">governor/hold-fact は :hard? を記録しない — 台帳上、上書き不可の HARD hold と 人間署名待ちの escalate はどちらも :disposition :hold で並ぶ。この表の判定は run 時の verdict から導出している</span></td></tr>
+        <tr><td>escalate 時のファクトの :disposition</td><td><code>hold</code></td><td><span class="warn">人間の署名待ちも :hold として記録される (:basis が空かどうかが唯一の手掛かり)</span></td></tr>
+        <tr><td>HARD hold ファクトの :basis</td><td>already-processed</td><td><span class="ok">違反 rule が台帳に残る</span></td></tr>
+        <tr><td>確定レコードに承認者が残るか</td><td><code>dropped</code></td><td><span class="warn">store/log-batch・finalize-shipment は承認者引数を持たない — 確定した batch 記録に op-1 は残らない。承認者は 3 件の :approval-committed 監査ファクトにのみ存在する</span></td></tr>
+        <tr><td>actor 自身のファクトに承認者が現れるか</td><td><code>absent</code></td><td><span class="warn">actor が書くのは :governor-hold のみで、そこに承認者の欄は無い (:actor は actor id)</span></td></tr>
       </tbody>
     </table>
     </div>
@@ -2522,7 +2576,31 @@ clojure.lang.LazySeq@1a7ae44a
     <table>
       <thead><tr><th>Fact</th><th>Op</th><th>Batch</th><th>Disposition</th><th>Basis</th><th>承認者</th><th>確信度</th></tr></thead>
       <tbody>
-clojure.lang.LazySeq@d438468e
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-001</code></td><td><code>hold</code></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>approval-committed</code></td><td><code>log-processing-batch</code></td><td><code>batch-001</code></td><td><code>commit</code></td><td><span class="muted">—</span></td><td>op-1</td><td></td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>coordinate-shipment</code></td><td><code>batch-001</code></td><td><code>hold</code></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>approval-committed</code></td><td><code>coordinate-shipment</code></td><td><code>batch-001</code></td><td><code>commit</code></td><td><span class="muted">—</span></td><td>op-1</td><td></td></tr>
+        <tr><td><code>auto-commit</code></td><td><code>schedule-maintenance</code></td><td><code>batch-001</code></td><td><code>commit</code></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>schedule-maintenance</code></td><td><code>batch-001</code></td><td><code>hold</code></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td>0.4</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>flag-quality-concern</code></td><td><code>batch-008</code></td><td><code>hold</code></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>approval-committed</code></td><td><code>flag-quality-concern</code></td><td><code>batch-008</code></td><td><code>commit</code></td><td><span class="muted">—</span></td><td>op-1</td><td></td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-001</code></td><td><code>hold</code></td><td>already-processed</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>coordinate-shipment</code></td><td><code>batch-001</code></td><td><code>hold</code></td><td>already-shipment-finalized</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-002</code></td><td><code>hold</code></td><td>germination-rate-below-minimum</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-003</code></td><td><code>hold</code></td><td>trait-label-mismatch</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-004</code></td><td><code>hold</code></td><td>seed-borne-disease-detected</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-005</code></td><td><code>hold</code></td><td>moisture-out-of-target</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-006</code></td><td><code>hold</code></td><td>germinator-calibration-overdue</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-007</code></td><td><code>hold</code></td><td>evidence-incomplete</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-008</code></td><td><code>hold</code></td><td>quality-flag-unresolved</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-009</code></td><td><code>hold</code></td><td>sanitation-score-insufficient</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-010</code></td><td><code>hold</code></td><td>other-crop-seed-exceeded</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-011</code></td><td><code>hold</code></td><td>purity-below-minimum</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>log-processing-batch</code></td><td><code>batch-012</code></td><td><code>hold</code></td><td>weight-variance-excessive</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>coordinate-shipment</code></td><td><code>batch-013</code></td><td><code>hold</code></td><td>batch-not-registered</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>operate-gravity-table</code></td><td><code>batch-001</code></td><td><code>hold</code></td><td>op-not-allowed</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>schedule-maintenance</code></td><td><code>batch-001</code></td><td><code>hold</code></td><td>effect-not-propose</td><td><span class="muted">—</span></td><td>0.9</td></tr>
+        <tr><td><code>governor-hold</code></td><td><code>flag-quality-concern</code></td><td><code>batch-008</code></td><td><code>hold</code></td><td>no-spec-basis</td><td><span class="muted">—</span></td><td>0.9</td></tr>
       </tbody>
     </table>
     </div>
@@ -2534,7 +2612,10 @@ clojure.lang.LazySeq@d438468e
     <table>
       <thead><tr><th>ID</th><th>名称</th><th>水分目標 ± 許容 (%)</th><th>最低発芽率 (%)</th><th>最低純度 (%)</th><th>他作物種子上限 (%)</th></tr></thead>
       <tbody>
-clojure.lang.LazySeq@1f765da6
+        <tr><td><code>maize/hybrid</code></td><td>ハイブリッドとうもろこし種子</td><td>13 ± 0.5</td><td>90</td><td>98</td><td>0.5</td></tr>
+        <tr><td><code>soybean/certified</code></td><td>認証大豆種子</td><td>11 ± 0.5</td><td>80</td><td>98</td><td>0.5</td></tr>
+        <tr><td><code>vegetable/tomato</code></td><td>トマト種子</td><td>7 ± 0.5</td><td>75</td><td>97</td><td>1</td></tr>
+        <tr><td><code>wheat/certified</code></td><td>認証小麦種子</td><td>12 ± 0.5</td><td>85</td><td>99</td><td>0.3</td></tr>
       </tbody>
     </table>
     </div>
@@ -2546,7 +2627,9 @@ clojure.lang.LazySeq@1f765da6
     <table>
       <thead><tr><th>ID</th><th>名称</th><th>形質申告</th><th>規制対象形質</th><th>必要書類</th></tr></thead>
       <tbody>
-clojure.lang.LazySeq@1eb4ae68
+        <tr><td><code>eu/oecd</code></td><td>European Union (OECD Seed Schemes / EU Seed Marketing Directive)</td><td><span class="warn">必要</span></td><td>gm-bt-trait, gm-ht-trait, hybrid-f1-trait</td><td>cleaning-grading-log, germination-test, moisture-test, purity-test, seed-borne-disease-test, seed-lot-intake-record, trait-declaration, weight-check</td></tr>
+        <tr><td><code>jp/maff</code></td><td>日本 (種苗法・農林水産省)</td><td><span class="warn">必要</span></td><td>gm-bt-trait, gm-ht-trait</td><td>cleaning-grading-log, germination-test, moisture-test, purity-test, seed-borne-disease-test, seed-lot-intake-record, trait-declaration, weight-check</td></tr>
+        <tr><td><code>us/usda</code></td><td>United States (Federal Seed Act / USDA-AMS)</td><td><span class="warn">必要</span></td><td>gm-bt-trait, gm-ht-trait</td><td>cleaning-grading-log, germination-test, moisture-test, purity-test, seed-borne-disease-test, seed-lot-intake-record, trait-declaration, weight-check</td></tr>
       </tbody>
     </table>
     </div>
@@ -2558,7 +2641,14 @@ clojure.lang.LazySeq@1eb4ae68
     <table>
       <thead><tr><th>Seed source</th><th>Primary trait</th><th>Cross-contact risk</th></tr></thead>
       <tbody>
-clojure.lang.LazySeq@5e01a619
+        <tr><td><code>maize/hybrid-bt</code></td><td><code>gm-bt-trait</code></td><td><span class="muted">—</span></td></tr>
+        <tr><td><code>maize/hybrid-conventional</code></td><td><span class="muted">—</span></td><td><span class="warn">gm-bt-trait</span></td></tr>
+        <tr><td><code>soybean/conventional</code></td><td><span class="muted">—</span></td><td><span class="warn">gm-ht-trait</span></td></tr>
+        <tr><td><code>soybean/roundup-ready</code></td><td><code>gm-ht-trait</code></td><td><span class="muted">—</span></td></tr>
+        <tr><td><code>tomato/heirloom</code></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
+        <tr><td><code>tomato/hybrid-f1</code></td><td><code>hybrid-f1-trait</code></td><td><span class="muted">—</span></td></tr>
+        <tr><td><code>wheat/hard-red-certified</code></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
+        <tr><td><code>wheat/soft-white-certified</code></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
       </tbody>
     </table>
     </div>

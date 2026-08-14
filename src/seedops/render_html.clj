@@ -337,23 +337,36 @@
     (str/join ", " (map esc (sort (map kw xs))))
     "—"))
 
-(defn- num [v]
+(defn- fmt-num [v]
   (cond (nil? v) "—"
         (and (number? v) (== v (Math/floor (double v)))) (str (long v))
         :else (str v)))
 
 (defn- tag [class label] (str "<span class=\"" class "\">" label "</span>"))
 
+(def ^:private hard-hold-marker
+  "The exact string a HARD-hold cell renders. `-main` counts occurrences of
+  this IN THE RENDERED DOCUMENT, so the build-time invariant is a claim about
+  the page rather than about an in-memory value the page might not contain."
+  "HARD hold · 上書き不可")
+
 (defn- disposition-cell [{:keys [disposition approved?]}]
   (case disposition
-    :hard        (tag "critical" "HARD hold · 上書き不可")
+    :hard        (tag "critical" hard-hold-marker)
     :escalate    (if approved?
                    (tag "ok" "escalate → 承認 → 確定")
                    (tag "warn" "escalate · 人間の署名待ち"))
     :auto-commit (tag "ok" "auto-commit")
     (tag "muted" "unknown")))
 
-(defn- rows [& cells-seq] (str/join "\n" cells-seq))
+(defn- rows
+  "Join already-rendered `<tr>` strings. Takes ONE collection on purpose --- a
+  variadic version silently stringifies a passed-in lazy seq into
+  `clojure.lang.LazySeq@...`, which is deterministic, byte-stable, and
+  completely empty of data. That exact bug shipped in the first run of this
+  generator and was caught by counting rendered rows, not by diffing bytes."
+  [trs]
+  (str/join "\n" trs))
 
 (defn- tr [& cells]
   (str "        <tr>" (str/join (map #(str "<td>" % "</td>") cells)) "</tr>"))
@@ -415,15 +428,15 @@
         (esc (:name j))
         (kw-list sources)
         (if record
-          (str (num (:moisture-percent record)) " / "
-               (num (:germination-percent record)) " / "
-               (num (:purity-percent record)) " / "
-               (num (:other-crop-seed-percent record)))
+          (str (fmt-num (:moisture-percent record)) " / "
+               (fmt-num (:germination-percent record)) " / "
+               (fmt-num (:purity-percent record)) " / "
+               (fmt-num (:other-crop-seed-percent record)))
           (tag "muted" "—"))
-        (str (num (:moisture-target-percent lot-m)) "±" (num (:moisture-tolerance-percent lot-m))
-             " / ≥" (num (:germination-min-percent lot-m))
-             " / ≥" (num (:purity-min-percent lot-m))
-             " / ≤" (num (:other-crop-seed-max-percent lot-m)))
+        (str (fmt-num (:moisture-target-percent lot-m)) "±" (fmt-num (:moisture-tolerance-percent lot-m))
+             " / ≥" (fmt-num (:germination-min-percent lot-m))
+             " / ≥" (fmt-num (:purity-min-percent lot-m))
+             " / ≤" (fmt-num (:other-crop-seed-max-percent lot-m)))
         (if (false? registered?)
           (tag "critical" "store に未登録")
           (lifecycle-cell record))
@@ -445,7 +458,7 @@
       (code op)
       (code subject)
       (disposition-cell r)
-      (num (:confidence verdict))
+      (fmt-num (:confidence verdict))
       (violation-cell verdict)))
 
 ;; ── hard-rule coverage ──
@@ -492,10 +505,10 @@
 (defn- lot-type-rows []
   (rows (for [[id m] (sort-by key facts/seed-lot-types)]
           (tr (code id) (esc (:name m))
-              (str (num (:moisture-target-percent m)) " ± " (num (:moisture-tolerance-percent m)))
-              (num (:germination-min-percent m))
-              (num (:purity-min-percent m))
-              (num (:other-crop-seed-max-percent m))))))
+              (str (fmt-num (:moisture-target-percent m)) " ± " (fmt-num (:moisture-tolerance-percent m)))
+              (fmt-num (:germination-min-percent m))
+              (fmt-num (:purity-min-percent m))
+              (fmt-num (:other-crop-seed-max-percent m))))))
 
 (defn- jurisdiction-rows []
   (rows (for [[id m] (sort-by key facts/jurisdictions)]
@@ -663,19 +676,37 @@
      "</footer>\n"
      "</body></html>\n")))
 
+(defn- occurrences
+  "How many times `sub` appears in `s`."
+  [s sub]
+  (loop [i 0 n 0]
+    (let [j (str/index-of s sub i)]
+      (if j (recur (+ j (count sub)) (inc n)) n))))
+
 (defn -main [& args]
-  (let [out    (or (first args) "docs/samples/operator-console.html")
-        world  (run-demo!)
-        html   (render world)
-        hard-n (count (filter #(= :hard (:disposition %)) (:results world)))
-        ledger (store/audit-trail (:store world))]
+  (let [out       (or (first args) "docs/samples/operator-console.html")
+        world     (run-demo!)
+        html      (render world)
+        ledger    (store/audit-trail (:store world))
+        ;; Counted out of the RENDERED DOCUMENT, not out of the run: an
+        ;; earlier revision of this generator counted the in-memory results
+        ;; and happily reported 17 HARD holds while every table body in the
+        ;; page held a stringified lazy seq and not one row of data.
+        hard-n    (occurrences html hard-hold-marker)
+        row-n     (occurrences html "        <tr>")
+        section-n (occurrences html "<section class=\"card\">")]
     (when (zero? hard-n)
       (throw (ex-info (str "operator console rendered 0 HARD governor holds — the page must "
-                           "demonstrate at least one un-overridable block")
+                           "demonstrate at least one un-overridable governor block")
                       {:hard-holds 0 :decisions (count (:results world))})))
+    (when (< row-n (count (:results world)))
+      (throw (ex-info (str "operator console rendered fewer data rows (" row-n ") than the run "
+                           "produced decisions (" (count (:results world)) ") — a table body "
+                           "was dropped or stringified instead of rendered")
+                      {:rendered-rows row-n :decisions (count (:results world))})))
     (spit out html)
     (println "wrote" out
-             (str "(" hard-n " HARD holds, "
+             (str "(" hard-n " HARD holds, " section-n " sections, " row-n " data rows, "
                   (count (:results world)) " decisions, "
                   (count ledger) " ledger facts, "
                   (count scenario-batches) " batches)"))))
