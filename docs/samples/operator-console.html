@@ -222,7 +222,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--color-neutr
 <main>
   <section class="card">
     <h2>処理バッチ</h2>
-    <p class="muted">この run が Governor に掛けた全バッチ。測定値・規格窓とも <code>seedops.facts/seed-lot-types</code> 由来で、規格内の値は各 seed-lot type の公表窓そのもの、規格外の値はその窓から一意の変換で導いている。ページは <code>clojure -M:dev:render-html</code> が実 actor 実行から生成する。</p>
+    <p class="muted">この run が Governor に掛けた全バッチ。測定値・規格窓とも <code>seedops.facts/seed-lot-types</code> 由来で、規格内の値は各 seed-lot type の公表窓そのもの、規格外の値はその窓から一意の変換で導いている。ページは <code>kbb -M:dev:render-html</code> が実 actor 実行から生成する。</p>
     <div class="table-wrap">
     <table>
       <thead><tr><th>Batch</th><th>Seed-lot type</th><th>法域</th><th>Seed source</th><th>測定値 (水分/発芽/純度/他作物 %)</th><th>規格窓</th><th>ライフサイクル</th><th>承認者</th><th>この run での役割</th></tr></thead>
@@ -408,7 +408,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--color-neutr
   </section>
 </main>
 <footer>
-  <p>生成: <code>clojure -M:dev:render-html</code> (<code>seedops.render-html</code>) — 実 actor 実行の出力。決定論的 (タイムスタンプ・乱数・map 順序に依存しない)。<br>
+  <p>生成: <code>kbb -M:dev:render-html</code> (<code>seedops.render-html</code>) — 実 actor 実行の出力。決定論的 (タイムスタンプ・乱数・map 順序に依存しない)。<br>
   この run: HARD hold 17 件 / 判定 22 件 / 監査ファクト 25 件 / バッチ 13 件。</p>
 </footer>
 </body></html>

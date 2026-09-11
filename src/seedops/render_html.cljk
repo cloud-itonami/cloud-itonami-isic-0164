@@ -7,7 +7,7 @@
   `seedops.store` --- and renders whatever that stack actually returns.
 
   Why the scenario is authored here rather than reused: this repo's own
-  demo driver (`clojure -M:dev:run`, i.e. `seedops.sim`) is still a stub
+  demo driver (`kbb -M:dev:run`, i.e. `seedops.sim`) is still a stub
   (it prints \"SeedOps simulation: not yet implemented\" and exits), so
   there are no seeded batch ids to reuse. It was run before this file was
   written, to confirm exactly that. What DOES exist as seed data is
@@ -52,7 +52,7 @@
   `var(--x)` on the finished page resolves to nothing --- an unstyled console is
   a build error here, not a thing you find by looking at it.
 
-  Usage: `clojure -M:dev:render-html [out-file]`
+  Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
   (:require [clojure.java.io :as io]
             [kotoba.lang.text :as str]
@@ -690,7 +690,7 @@
       (str "この run が Governor に掛けた全バッチ。測定値・規格窓とも "
            "<code>seedops.facts/seed-lot-types</code> 由来で、規格内の値は各 seed-lot type の"
            "公表窓そのもの、規格外の値はその窓から一意の変換で導いている。"
-           "ページは <code>clojure -M:dev:render-html</code> が実 actor 実行から生成する。")
+           "ページは <code>kbb -M:dev:render-html</code> が実 actor 実行から生成する。")
       (table ["Batch" "Seed-lot type" "法域" "Seed source" "測定値 (水分/発芽/純度/他作物 %)"
               "規格窓" "ライフサイクル" "承認者" "この run での役割"]
              (rows (map (partial batch-row store results) scenario-batches))))
@@ -751,7 +751,7 @@
 
      "</main>\n"
      "<footer>\n"
-     "  <p>生成: <code>clojure -M:dev:render-html</code> (<code>seedops.render-html</code>) — "
+     "  <p>生成: <code>kbb -M:dev:render-html</code> (<code>seedops.render-html</code>) — "
      "実 actor 実行の出力。決定論的 (タイムスタンプ・乱数・map 順序に依存しない)。<br>\n"
      "  この run: HARD hold " (count hard-results) " 件 / 判定 " (count results) " 件 / 監査ファクト "
      (count ledger) " 件 / バッチ " (count scenario-batches) " 件。</p>\n"
