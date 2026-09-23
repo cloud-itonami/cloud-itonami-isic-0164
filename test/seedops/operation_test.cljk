@@ -1,5 +1,5 @@
 (ns seedops.operation-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [seedops.operation :as operation]
             [seedops.governor :as governor]))
 
