@@ -10,7 +10,7 @@
   `germinator-calibration-overdue?`) obtain it themselves via a
   `:clj`/`:cljs` reader-conditional at the call site (see
   `seedops.governor`)."
-  (:require [clojure.set :as set]))
+  (:require [kotoba.lang.coll :as set]))
 
 (defn moisture-out-of-target?
   "Independently verify that the batch's finished seed-lot moisture falls
