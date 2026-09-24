@@ -1,0 +1,32 @@
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-0164"
+ :cases
+ [{:id :seed-bag-palletize
+   :kind :manipulator
+   :procedure "palletizing arm lifts a filled certified-seed bag off the bagging scale onto the pallet stack"
+   :params {:l1-m 0.90 :l2-m 0.80 :m1-kg 18.0 :m2-kg 12.0
+            :from [0.90 0.20] :to [0.40 1.20] :duration-s 3.0 :steps 500}
+   :sweep {:param :payload-kg :values [10.0 15.0 20.0 25.0 30.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 600.0 :basis "estimate: continuous shoulder torque of a mid-size palletizing arm rated for ~30 kg bags"}
+   :boundary {:lo 1.0 :hi 80.0}}
+  {:id :seed-dryer-bed
+   :kind :thermal
+   :procedure "batch dryer blows heated air through a 0.30 m seed-lot bed; the seed at the air inlet face must not overheat"
+   :params {:thickness-m 0.30 :conductivity-w-mk 0.15 :density-kg-m3 750.0 :specific-heat-j-kgk 1800.0
+            :t0-c 20.0 :h-front-w-m2k 30.0 :h-back-w-m2k 5.0 :t-back-ambient-c 20.0
+            :threshold-c 43.0 :duration-s 14400.0 :nodes 21}
+   :sweep {:param :t-hot-c :values [38.0 41.0 44.0 47.0 50.0]}
+   :quantity :final-front-c
+   :limit {:max 43.0 :basis "estimate: seed-maize drying practice keeps kernel temperature at or below ~43 C to protect germination; replace with the seed-certification scheme's dryer limit"}
+   :boundary {:lo 30.0 :hi 60.0}}
+  {:id :seed-pallet-shuttle
+   :kind :transport
+   :procedure "pallet AMR shuttles a stack of seed bags from the bagging line to the cold seed store"
+   :params {:mass-kg 900.0 :distance-m 60.0 :v-max-mps 1.5 :a-max-mps2 0.5 :brake-decel-mps2 1.0
+            :drive-force-n 900.0 :crr 0.015 :cog-height-m 0.50 :payload-cog-height-m 1.0
+            :support-half-length-m 0.60 :max-time-s 3000.0}
+   :sweep {:param :payload-kg :values [200.0 400.0 600.0 800.0 1000.0]}
+   :quantity :cycle-time-s
+   :limit {:max 50.0 :basis "estimate: one bagging-line-to-store leg per pallet within the line's ~1 pallet/min output"}
+   :boundary {:lo 50.0 :hi 6000.0}}]}
