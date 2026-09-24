@@ -17,7 +17,7 @@
   contamination levels, though seed-borne disease and moisture-driven
   spoilage remain genuine hazards -- to the future crop, not to a
   consumer."
-  (:require [clojure.set :as set]))
+  (:require [kotoba.lang.coll :as set]))
 
 (def seed-lot-types
   "Valid seed-lot categories destined for propagation and their safe
